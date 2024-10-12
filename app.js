@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // URI MongoDb Atlas Credentials
-const uri =  'mongodb+srv://<username>:<password>@cluster0.mongodb.net/comp3123_assignment1?retryWrites=true&w=majority';
+// const uri =  'mongodb+srv://<username>:<password>@cluster0.mongodb.net/comp3123_assignment1?retryWrites=true&w=majority';
 
 
 // Connect to MongoDB

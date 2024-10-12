@@ -20,7 +20,15 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-        if (user.password !== password) {
+        // Use bcrypt to compare passwords
+        const isMatch = await new Promise((resolve, reject) => {
+            user.comparePassword(password, (err, isMatch) => {
+                if (err) reject(err);
+                resolve(isMatch);
+            });
+        });
+
+        if (!isMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         res.json({ message: 'Login successful' });
@@ -29,7 +37,7 @@ const loginUser = async (req, res) => {
         console.log(err);
         res.status(500).json({ message: 'Error occurred during login' });
     }
-}
+};
 
 module.exports = {
     signupUser,
